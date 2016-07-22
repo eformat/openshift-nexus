@@ -61,7 +61,7 @@ objects:
     name: sonatype-work
   spec:
     accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
     resources:
       requests:
         storage: ${VOLUME_CAPACITY}
