@@ -3,7 +3,6 @@
 This is instant nexus application for OpenShift Enterprise 3.
 
 ```
-oc new-project nexus
-oc project nexus
-oc new-app -f https://raw.githubusercontent.com/eformat/openshift-sandbox/master/nexus.yaml
+oc new-project nexus --display-name="Nexus" --description="Nexus"
+oc new-app -f https://raw.githubusercontent.com/eformat/nexus.yaml
 ```
