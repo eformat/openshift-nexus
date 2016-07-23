@@ -16,17 +16,18 @@ objects:
         labels:
           name: ${APPLICATION_NAME}
       spec:
-        containers:
+        serviceAccountName: ${APPLICATION_NAME}
+        containers:                
         - image: ${NEXUS_IMAGE}
           imagePullPolicy: Always
           name: ${APPLICATION_NAME}
           volumeMounts:
-          - mountPath: /sonatype-work
-            name: sonatype-work
+          - mountPath: /nexus-data
+            name: nexus-data
         volumes:
-        - name: sonatype-work
+        - name: nexus-data
           persistentVolumeClaim:
-            claimName: sonatype-work
+            claimName: nexus-data
     triggers:
     - imageChangeParams:
         automatic: true
@@ -42,7 +43,14 @@ objects:
   metadata:
     name: nexus
   spec:
-    dockerImageRepository: sonatype/nexus
+    dockerImageRepository: sonatype/nexus3
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    creationTimestamp: null
+    labels:
+      template: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
 - apiVersion: v1
   kind: Service
   metadata:
@@ -58,13 +66,21 @@ objects:
 - apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
-    name: sonatype-work
+    name: nexus-data
   spec:
     accessModes:
     - ReadWriteOnce
     resources:
       requests:
         storage: ${VOLUME_CAPACITY}
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: nexus
+  spec:
+    to:
+      kind: Service
+      name: ${APPLICATION_NAME}     
 parameters:
 - name: APPLICATION_NAME
   required: true
