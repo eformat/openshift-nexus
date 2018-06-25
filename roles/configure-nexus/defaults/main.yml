@@ -1,0 +1,14 @@
+---
+nexus_user: admin
+nexus_password: admin123
+configure_redhat_repos: true
+configure_labs_repos: true
+nexus_server_poll_retries: 100
+nexus_server_poll_delay_in_seconds: 5
+nexus_repos:
+- script_name: redhat-repos
+  script_file: ../files/redhat-repos.json
+- script_name: labs-repos
+  script_file: ../files/labs-repos.json  
+- script_name: fusesource-repos
+  script_file: ../files/fusesource-repos.json

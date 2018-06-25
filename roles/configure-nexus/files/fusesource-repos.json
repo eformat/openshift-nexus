@@ -1,0 +1,5 @@
+{
+  "name": "fusesource-repos",
+  "type": "groovy",
+  "content": "if ( !repository.repositoryManager.exists( 'fusesource.m2' ) ){ repository.createMavenProxy('fusesource.m2','https://repo.fusesource.com/nexus/content/groups/public/') }; if ( !repository.repositoryManager.exists( 'fusesource.ea' )){ repository.createMavenProxy('fusesource.ea','https://repo.fusesource.com/nexus/content/groups/ea/') }; if ( !repository.repositoryManager.exists( 'fusesource-public' ) ){ repository.createMavenGroup('fusesource-public', ['fusesource.m2','fusesource.ea']) }"
+}

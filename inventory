@@ -1,0 +1,2 @@
+[ocp-nexus]
+localhost ansible_connection=local
