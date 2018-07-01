@@ -3,8 +3,13 @@
 
 // not the prettiest code I've written, but it's really the only way to config manage nexus
 
+import org.sonatype.nexus.blobstore.api.BlobStoreManager
+import org.sonatype.nexus.repository.maven.LayoutPolicy
+import org.sonatype.nexus.repository.maven.VersionPolicy
+import org.sonatype.nexus.repository.storage.WritePolicy
+
 if ( !repository.repositoryManager.exists( 'jboss-public' ) ){
-    repository.createMavenProxy('jboss-public','https://repository.jboss.org/nexus/content/groups/public/')
+    repository.createMavenProxy('jboss-public','https://repository.jboss.org/nexus/content/groups/public/', BlobStoreManager.DEFAULT_BLOBSTORE_NAME, true, VersionPolicy.MIXED, LayoutPolicy.STRICT)
 }
 
 if ( !repository.repositoryManager.exists( 'jboss-ea' ) ){
@@ -16,7 +21,7 @@ if ( !repository.repositoryManager.exists( 'redhat-ga' ) ){
 }
 
 if ( !repository.repositoryManager.exists( 'redhat-earlyaccess-all' ) ){
-    repository.createMavenProxy('redhat-earlyaccess-all','https://maven.repository.redhat.com/earlyaccess/all/')
+    repository.createMavenProxy('redhat-earlyaccess-all','https://maven.repository.redhat.com/earlyaccess/all/', BlobStoreManager.DEFAULT_BLOBSTORE_NAME, true, VersionPolicy.MIXED, LayoutPolicy.STRICT)
 }
 
 if ( !repository.repositoryManager.exists( 'redhat-public' ) ){
