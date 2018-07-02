@@ -12,3 +12,5 @@ nexus_repos:
   script_file: ../files/labs-repos.json  
 - script_name: fusesource-repos
   script_file: ../files/fusesource-repos.json
+- script_name: spring-repos
+  script_file: ../files/spring-repos.json
