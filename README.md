@@ -3,20 +3,29 @@
 This is instant nexus application for OpenShift Enterprise 3.
 
 Install nexus
-
 ```
 oc new-project nexus --display-name="Nexus" --description="Nexus"
 oc new-app -f https://raw.githubusercontent.com/eformat/openshift-nexus/master/nexus.yaml
 ```
 
-Configure nexus
+OR use the operator
+```
+oc new-project nexus --display-name="Nexus" --description="Nexus"
+oc apply -f https://raw.githubusercontent.com/eformat/openshift-nexus/master/nexus-operator.yaml
+oc apply -f https://raw.githubusercontent.com/eformat/openshift-nexus/master/nexus-cr.yaml
+```
 
+Login to UX and configure basic nexus, use generated password and create new password if required
+```
+oc exec $(oc get pods -lapp=nexus --template='{{range .items}}{{.metadata.name}}{{end}}') -- cat /nexus-data/admin.password
+```
+
+Configure nexus
 ```
 ansible-playbook -i inventory ocp-nexus-configure.yml
 ```
 
-
-###Notes
+### Notes
 - VersionPolicy: release, snapshot, mixed
 - LayoutPolicy: strict, permissive
 - blobStoreName: default

@@ -1,0 +1,22 @@
+---
+apiVersion: apps.m88i.io/v1alpha1
+kind: Nexus
+metadata:
+  name: nexus
+  namespace: nexus
+spec:
+  networking:
+    expose: true
+  persistence:
+    persistent: true
+    volumeSize: 10Gi
+  replicas: 1
+  resources:
+    limits:
+      cpu: '2'
+      memory: 2Gi
+    requests:
+      cpu: '1'
+      memory: 2Gi
+  useRedHatImage: false
+

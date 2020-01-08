@@ -1,0 +1,26 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: nexus-operator-hub
+  namespace: nexus
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: nexus-operator-hub
+  source: community-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: nexus-operator.v0.1.0
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  annotations:
+    olm.providedAPIs: Nexus.v1alpha1.apps.m88i.io
+  generateName: nexus-
+  generation: 1
+  name: nexus
+  namespace: nexus
+spec:
+  targetNamespaces:
+  - nexus
